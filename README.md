@@ -1,4 +1,4 @@
-# QuickFinder
+# PopupFinder
 
 This is a variation of [Cuis Finder](https://github.com/npapagna/cuis-finder) by Nicolas Papagna, that uses a popup morph as user interface.
 
