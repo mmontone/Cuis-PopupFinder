@@ -2,7 +2,7 @@
 
 This is a variation of [Cuis Finder](https://github.com/npapagna/cuis-finder) by Nicolas Papagna, that uses a popup morph as user interface.
 
-Finder is a system-wide search tool for Cuis Smalltalk.
+Finder is a system-wide search tool for [Cuis Smalltalk](https://cuis-smalltalk.github.io/Cuis-Website/).
 
 You can use it to search for classes, methods, senders, implementors, system categories... you name it!
 
