@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4528] on 6 February 2021 at 2:41:46 pm'!
+'From Cuis 5.0 [latest update: #4526] on 6 February 2021 at 3:24:29 pm'!
 'Description '!
-!provides: 'PopupFinder' 1 49!
+!provides: 'PopupFinder' 1 51!
 !requires: 'WorldKeyStrokes' 1 2 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
@@ -458,6 +458,16 @@ processArrowUpOrDown: aKeyboardEvent
 	^ false
 	! !
 
+!FinderMorph methodsFor: 'shortcuts' stamp: 'MM 2/6/2021 15:17:27'!
+processCatalogKey: aKeyboardEvent
+
+	(aKeyboardEvent commandAltKeyPressed)
+		ifTrue: [
+			model catalogsDo: [:catalog |
+				(catalog keyStrokeCharacter == aKeyboardEvent keyCharacter)
+					ifTrue: [model changeSelectedCatalog: catalog. ^ true]]].
+	^ false! !
+
 !FinderMorph methodsFor: 'shortcuts' stamp: 'MM 9/7/2020 12:08:12'!
 processEscKey: aKeyboardEvent
 
@@ -470,7 +480,7 @@ processEscKey: aKeyboardEvent
 		
 	^ aKeyboardEvent isEsc! !
 
-!FinderMorph methodsFor: 'shortcuts' stamp: 'MM 2/6/2021 13:23:47'!
+!FinderMorph methodsFor: 'shortcuts' stamp: 'MM 2/6/2021 15:02:02'!
 processKeyStroke: aKeyboardEvent 
 	
 	(self processTab: aKeyboardEvent)
@@ -487,6 +497,9 @@ processKeyStroke: aKeyboardEvent
 		
 	(self processEscKey: aKeyboardEvent)
 		ifTrue: [ ^ true ].
+		
+	(self processCatalogKey: aKeyboardEvent)
+		ifTrue: [^ true].
 
 	(self forwardToResults: aKeyboardEvent)
 		ifTrue: [ ^ true ].
@@ -807,6 +820,11 @@ browse: aResult
 
 	self subclassResponsibility! !
 
+!Catalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:10:54'!
+keyStrokeCharacter
+	"Keystroke to use in finder to switch to this catalog. If nil, no keystroke is used. Override in subclasses."
+	^ nil! !
+
 !Catalog class methodsFor: 'known instances' stamp: 'NPM 4/22/2020 19:31:34'!
 classNames
 	
@@ -863,6 +881,10 @@ browse: aClassName
 	BrowserWindow
 		fullOnClass: class! !
 
+!ClassNamesCatalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:11:15'!
+keyStrokeCharacter
+	^ $c! !
+
 !CompositeCatalog methodsFor: 'initialization' stamp: 'NPM 4/1/2020 00:30:46'!
 initializeWithAll: children
 
@@ -909,6 +931,10 @@ browse: aSelector
 
 	Smalltalk browseAllImplementorsOf: aSelector! !
 
+!ImplementedSelectorsCatalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:24:02'!
+keyStrokeCharacter
+	^ $s! !
+
 !ImplementorsCatalog methodsFor: 'searching' stamp: 'NPM 5/24/2020 13:40:14'!
 processNonEmptySearchQuery: aQuery
 
@@ -936,6 +962,10 @@ initialize
 	
 	resultsSorter := ResultsSorter alphabetically, ResultsSorter bySelectorSize ! !
 
+!ImplementorsCatalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:11:37'!
+keyStrokeCharacter
+	^ $m! !
+
 !PackagesCatalog methodsFor: 'searching' stamp: 'NPM 4/2/2020 02:30:48'!
 processNonEmptySearchQuery: aQuery 
 	
@@ -954,6 +984,10 @@ browse: aSystemCategoryName
 			BrowserWindow
 				open: newBrowser label: newBrowser defaultBrowserTitle! !
 
+!PackagesCatalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:11:50'!
+keyStrokeCharacter
+	^ $p! !
+
 !SendersCatalog methodsFor: 'searching' stamp: 'NPM 4/2/2020 02:30:48'!
 processNonEmptySearchQuery: aQuery 
 	
@@ -965,6 +999,10 @@ browse: aMethodReference
 	HierarchyBrowserWindow
 		onClass: aMethodReference methodClass
 		selector: aMethodReference selector! !
+
+!SendersCatalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:12:02'!
+keyStrokeCharacter
+	^ $n! !
 
 !ToolsCatalog methodsFor: 'initialization' stamp: 'NPM 4/4/2020 02:04:59'!
 initializeTools
@@ -1031,6 +1069,10 @@ menuItemsForOpenGroup
 				implementor compiledMethod
 					valueWithReceiver: implementor
 					methodClass arguments: {} ]! !
+
+!ToolsCatalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:12:14'!
+keyStrokeCharacter
+	^ $t! !
 
 !ToolsCatalog class methodsFor: 'instance creation' stamp: 'NPM 4/4/2020 02:04:14'!
 create
