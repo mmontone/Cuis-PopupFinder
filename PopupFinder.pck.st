@@ -1,6 +1,7 @@
-'From Cuis 5.0 [latest update: #4528] on 6 February 2021 at 1:26:13 pm'!
+'From Cuis 5.0 [latest update: #4528] on 6 February 2021 at 1:45:03 pm'!
 'Description '!
-!provides: 'PopupFinder' 1 46!
+!provides: 'PopupFinder' 1 48!
+!requires: 'WorldKeyStrokes' 1 2 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
 SystemOrganization addCategory: 'PopupFinder-UI-Model'!
@@ -591,12 +592,11 @@ open
 		buildMorphicWindow;
 		openInWorld! !
 
-!FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 9/24/2020 19:37:51'!
+!FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 13:44:42'!
 configureAsClassFinder
 	"self configureAsClassFinder"
 	
-	Preferences addPreference: #classFinder categories: #tools  default: (MethodReference class: BrowserWindow selector: #findClass)  balloonHelp: 'Finder morph'. 
-	Preferences setPreference: #classFinder toValue: (MethodReference class: FinderMorph selector: #open )
+	WorldKeyStrokes addKeyStrokeHandler: [:ev | self worldKeystrokeHandler: ev]
 
 	! !
 
@@ -612,6 +612,13 @@ current: anInstance
 isFindClassShortcut: aKeyboardEvent
 
 	^ aKeyboardEvent shiftPressed and: [ aKeyboardEvent isReturnKey ]! !
+
+!FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 13:43:49'!
+worldKeystrokeHandler: aKeyboardEvent
+	(aKeyboardEvent commandAltKeyPressed or: [ aKeyboardEvent controlKeyPressed ])
+		ifTrue: [
+			aKeyboardEvent keyCharacter = $f ifTrue: [ self open. ^true ]].
+	^false! !
 
 !FinderSearchInnerTextMorph methodsFor: 'as yet unclassified' stamp: 'MM 9/25/2020 14:49:37'!
 keyboardFocusChange: aBoolean
