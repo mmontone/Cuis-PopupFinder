@@ -26,12 +26,12 @@ Use `shift + f` to open the finder.
 
 Also, you can use catalog specific shortcuts:
 
-`alt-c` : Classes catalog.
-`alt-n` : Senders catalog.
-`alt-m` : Implementors catalog.
-`alt-s` : Selectors catalog.
-`alt-p` : System categories catalog.
-`alt-t` : Tools catalog.
+- `alt-c` : Classes catalog.
+- `alt-n` : Senders catalog.
+- `alt-m` : Implementors catalog.
+- `alt-s` : Selectors catalog.
+- `alt-p` : System categories catalog.
+- `alt-t` : Tools catalog.
 
 
 
