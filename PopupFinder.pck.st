@@ -1,6 +1,6 @@
-'From Cuis 5.0 [latest update: #4528] on 6 February 2021 at 1:45:03 pm'!
+'From Cuis 5.0 [latest update: #4528] on 6 February 2021 at 2:41:46 pm'!
 'Description '!
-!provides: 'PopupFinder' 1 48!
+!provides: 'PopupFinder' 1 49!
 !requires: 'WorldKeyStrokes' 1 2 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
@@ -619,6 +619,18 @@ worldKeystrokeHandler: aKeyboardEvent
 		ifTrue: [
 			aKeyboardEvent keyCharacter = $f ifTrue: [ self open. ^true ]].
 	^false! !
+
+!FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 14:41:28'!
+worldMenuForOpenGroup
+	^ `{{
+			#itemGroup 		-> 		10.
+			#itemOrder 		-> 		40.
+			#label 			->	'System finder'.
+			#object 			-> 	FinderMorph.
+			#selector 		-> 		#open.
+			#icon 			-> 	#inspectIcon.
+			#balloonText 	-> 		'The system finder'.
+		} asDictionary}`! !
 
 !FinderSearchInnerTextMorph methodsFor: 'as yet unclassified' stamp: 'MM 9/25/2020 14:49:37'!
 keyboardFocusChange: aBoolean
