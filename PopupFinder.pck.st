@@ -1,7 +1,7 @@
-'From Cuis 5.0 [latest update: #4526] on 6 February 2021 at 3:24:29 pm'!
+'From Cuis 5.0 [latest update: #4528] on 6 February 2021 at 4:51:15 pm'!
 'Description '!
-!provides: 'PopupFinder' 1 51!
-!requires: 'WorldKeyStrokes' 1 2 nil!
+!provides: 'PopupFinder' 1 53!
+!requires: 'WorldKeyStrokes' 1 4 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
 SystemOrganization addCategory: 'PopupFinder-UI-Model'!
@@ -605,11 +605,12 @@ open
 		buildMorphicWindow;
 		openInWorld! !
 
-!FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 13:44:42'!
+!FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 16:46:23'!
 configureAsClassFinder
 	"self configureAsClassFinder"
 	
-	WorldKeyStrokes addKeyStrokeHandler: [:ev | self worldKeystrokeHandler: ev]
+	WorldKeyStrokes addKeyStrokeHandler: [:ev | self worldKeystrokeHandler: ev].
+	WorldKeyStrokes addKeyStrokeInterceptor: [:ev :morph | self worldKeystrokeInterceptor: ev].
 
 	! !
 
@@ -631,6 +632,12 @@ worldKeystrokeHandler: aKeyboardEvent
 	(aKeyboardEvent commandAltKeyPressed or: [ aKeyboardEvent controlKeyPressed ])
 		ifTrue: [
 			aKeyboardEvent keyCharacter = $f ifTrue: [ self open. ^true ]].
+	^false! !
+
+!FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 16:47:37'!
+worldKeystrokeInterceptor: aKeyboardEvent
+	(aKeyboardEvent shiftPressed and: [ aKeyboardEvent isReturnKey ])
+		ifTrue: [self open. ^ true].
 	^false! !
 
 !FinderMorph class methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 14:41:28'!
