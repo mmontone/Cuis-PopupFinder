@@ -7,3 +7,9 @@ Finder is a system-wide search tool for [Cuis Smalltalk](https://cuis-smalltalk.
 You can use it to search for classes, methods, senders, implementors, system categories... you name it!
 
 It is inspired by Pharo's Spotter and the search feature provided by JetBrains tools, such as IntelliJ IDEA.
+
+# Install
+
+```Smalltalk
+Feature require: 'PopupFinder'
+```
