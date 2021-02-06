@@ -22,7 +22,7 @@ Feature require: 'PopupFinder'
 
 Use `shift + f` to open the finder.
 
-`tab` or `left arrow` and `right arrow` keys to change category.
+`tab` or `left arrow` and `right arrow` keys to change catalog.
 
 Also, you can use catalog specific shortcuts:
 
