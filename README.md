@@ -13,3 +13,5 @@ It is inspired by Pharo's Spotter and the search feature provided by JetBrains t
 ```Smalltalk
 Feature require: 'PopupFinder'
 ```
+
+Then open the finder using 'CMD-f' key stroke.
