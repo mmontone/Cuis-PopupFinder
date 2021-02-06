@@ -8,6 +8,8 @@ You can use it to search for classes, methods, senders, implementors, system cat
 
 It is inspired by Pharo's Spotter and the search feature provided by JetBrains tools, such as IntelliJ IDEA.
 
+![Finder screenshot](finder.png "Finder screenshot")
+
 # Install
 
 Drag and drop PopupFinder.pck.st file into Cuis or: 
