@@ -20,7 +20,7 @@ Feature require: 'PopupFinder'
 
 # Usage
 
-Use `shift + f` to open the finder.
+Use `alt + f` to open the finder.
 
 `tab` or `left arrow` and `right arrow` keys to change catalog.
 
