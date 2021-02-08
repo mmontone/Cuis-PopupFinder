@@ -1,6 +1,25 @@
-'From Cuis 5.0 [latest update: #4528] on 6 February 2021 at 4:51:15 pm'!
-'Description '!
-!provides: 'PopupFinder' 1 53!
+'From Cuis 5.0 [latest update: #4526] on 8 February 2021 at 9:54:49 am'!
+'Description This is a variation of Cuis Finder by Nicolas Papagna, that uses a popup morph as user interface.
+
+Finder is a system-wide search tool for Cuis Smalltalk.
+
+You can use it to search for classes, methods, senders, implementors, system categories... you name it!!
+
+It is inspired by Pharo''s Spotter and the search feature provided by JetBrains tools, such as IntelliJ IDEA.
+
+Use shift + enter key to open the finder.
+
+tab or left arrow and right arrow keys to change catalog.
+
+Also, you can use catalog specific shortcuts:
+
+    alt-c : Classes catalog.
+    alt-n : Senders catalog.
+    alt-m : Implementors catalog.
+    alt-s : Selectors catalog.
+    alt-p : System categories catalog.
+    alt-t : Tools catalog.'!
+!provides: 'PopupFinder' 1 54!
 !requires: 'WorldKeyStrokes' 1 4 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
@@ -597,11 +616,16 @@ initialize
 
 	self configureAsClassFinder.! !
 
-!FinderMorph class methodsFor: 'instance creation' stamp: 'MM 9/7/2020 11:42:47'!
+!FinderMorph class methodsFor: 'instance creation' stamp: 'MM 2/8/2021 09:54:23'!
 open
 	
+	^ self openOn: Finder withDefaultCatalogs! !
+
+!FinderMorph class methodsFor: 'instance creation' stamp: 'MM 2/8/2021 09:54:15'!
+openOn: aFinder
+	
 	^ self newColumn 
-		model: Finder withDefaultCatalogs;
+		model: aFinder
 		buildMorphicWindow;
 		openInWorld! !
 
