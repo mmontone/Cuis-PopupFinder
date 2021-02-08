@@ -1,4 +1,4 @@
-'From Cuis 5.0 [latest update: #4526] on 8 February 2021 at 9:54:49 am'!
+'From Cuis 5.0 [latest update: #4526] on 8 February 2021 at 9:56:30 am'!
 'Description This is a variation of Cuis Finder by Nicolas Papagna, that uses a popup morph as user interface.
 
 Finder is a system-wide search tool for Cuis Smalltalk.
@@ -19,7 +19,7 @@ Also, you can use catalog specific shortcuts:
     alt-s : Selectors catalog.
     alt-p : System categories catalog.
     alt-t : Tools catalog.'!
-!provides: 'PopupFinder' 1 54!
+!provides: 'PopupFinder' 1 55!
 !requires: 'WorldKeyStrokes' 1 4 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
@@ -621,11 +621,11 @@ open
 	
 	^ self openOn: Finder withDefaultCatalogs! !
 
-!FinderMorph class methodsFor: 'instance creation' stamp: 'MM 2/8/2021 09:54:15'!
+!FinderMorph class methodsFor: 'instance creation' stamp: 'MM 2/8/2021 09:56:20'!
 openOn: aFinder
 	
 	^ self newColumn 
-		model: aFinder
+		model: aFinder;
 		buildMorphicWindow;
 		openInWorld! !
 
