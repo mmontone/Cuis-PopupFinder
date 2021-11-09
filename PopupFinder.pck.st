@@ -1,4 +1,4 @@
-'From Cuis 5.0 [latest update: #4526] on 8 February 2021 at 9:56:30 am'!
+'From Cuis 5.0 [latest update: #4963] on 9 November 2021 at 2:30:01 pm'!
 'Description This is a variation of Cuis Finder by Nicolas Papagna, that uses a popup morph as user interface.
 
 Finder is a system-wide search tool for Cuis Smalltalk.
@@ -19,7 +19,7 @@ Also, you can use catalog specific shortcuts:
     alt-s : Selectors catalog.
     alt-p : System categories catalog.
     alt-t : Tools catalog.'!
-!provides: 'PopupFinder' 1 55!
+!provides: 'PopupFinder' 1 57!
 !requires: 'WorldKeyStrokes' 1 4 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
@@ -373,7 +373,7 @@ buildMorphicWindow
 	self buildResults.
 	self buildLayout.! !
 
-!FinderMorph methodsFor: 'GUI building' stamp: 'MM 9/25/2020 14:16:32'!
+!FinderMorph methodsFor: 'GUI building' stamp: 'MM 11/9/2021 14:28:26'!
 buildResults
 
 	results := (FinderResultsListMorph 
@@ -384,7 +384,8 @@ buildResults
 		color: Color veryVeryLightGray ;
 		autoDeselect: false;
 		setProperty: #click:localPosition:
-		toValue: [ :aMouseEvent :localEventPosition | self browseResultAt: localEventPosition ]! !
+		toValue: [ :aMouseEvent :localEventPosition | self browseResultAt: localEventPosition ];
+		yourself! !
 
 !FinderMorph methodsFor: 'GUI building' stamp: 'MM 2/6/2021 12:49:39'!
 buildSearchBar
@@ -611,10 +612,12 @@ openInWorld
 		w activeHand newKeyboardFocus: self submorphToFocusKeyboard ].
 	FinderMorph current: self.! !
 
-!FinderMorph class methodsFor: 'class initialization' stamp: 'MM 9/24/2020 19:40:27'!
+!FinderMorph class methodsFor: 'class initialization' stamp: 'MM 11/9/2021 14:29:49'!
 initialize
 
-	self configureAsClassFinder.! !
+	self configureAsClassFinder.
+	
+	self inform:  'Finder morph installed. Use cmd+f to open.'! !
 
 !FinderMorph class methodsFor: 'instance creation' stamp: 'MM 2/8/2021 09:54:23'!
 open
@@ -717,10 +720,10 @@ processKeyStroke
 	
 	self startStepping! !
 
-!FinderSearchBarMorph methodsFor: 'key stroke handling' stamp: 'MM 2/6/2021 13:08:15'!
+!FinderSearchBarMorph methodsFor: 'key stroke handling' stamp: 'MM 11/9/2021 14:27:13'!
 registerKeyStrokeHandler
 
-	^ searchBox textMorph
+	^ searchBox innerTextMorph
 		setProperty: #'keyStroke:'
 		toValue: [ :event | self processKeyStroke ]! !
 
@@ -770,10 +773,10 @@ query
 	
 	^ searchBox text asString! !
 
-!FinderSearchBarMorph methodsFor: 'accessing' stamp: 'NPM 5/3/2020 19:42:44'!
+!FinderSearchBarMorph methodsFor: 'accessing' stamp: 'MM 11/9/2021 14:28:41'!
 searchField
 	
-	^ searchBox textMorph! !
+	^ searchBox innerTextMorph! !
 
 !FinderSearchBarMorph methodsFor: 'accessing' stamp: 'NPM 5/9/2020 13:11:44'!
 timeSinceLastKeyStroke
@@ -1505,11 +1508,11 @@ doesNotUnderstand: aMessage
 
 	^ aMessage sendTo: textEditor! !
 
-!SearchBoxEditor class methodsFor: 'installing' stamp: 'MM 2/6/2021 13:23:22'!
+!SearchBoxEditor class methodsFor: 'installing' stamp: 'MM 11/9/2021 14:27:03'!
 installOn: aTextModelMorph handlingKeyStrokesWith: aKeyStrokeHandler  
 	
 	| newEditor textMorph |
-	textMorph _ aTextModelMorph textMorph.
+	textMorph _ aTextModelMorph innerTextMorph.
 	
 	newEditor _ self
 		forEditor: textMorph editor
