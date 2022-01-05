@@ -67,7 +67,7 @@ FinderSearchTextModelMorph class
 	instanceVariableNames: ''!
 
 !classDefinition: #FinderSearchBarMorph category: 'PopupFinder-UI'!
-WidgetMorph subclass: #FinderSearchBarMorph
+BoxedMorph subclass: #FinderSearchBarMorph
 	instanceVariableNames: 'layoutMorph searchBox changeHandler keyPressedHandler dateAndTimeOfLastKeyStroke timeToWaitBeforeNotifyingChanges'
 	classVariableNames: ''
 	poolDictionaries: ''
