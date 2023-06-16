@@ -1,4 +1,4 @@
-'From Cuis 6.0 [latest update: #5492] on 24 September 2022 at 10:21:16 am'!
+'From Cuis 6.0 [latest update: #5861] on 16 June 2023 at 6:42:16 pm'!
 'Description This is a variation of Cuis Finder by Nicolas Papagna, that uses a popup morph as user interface.
 
 Finder is a system-wide search tool for Cuis Smalltalk.
@@ -19,7 +19,7 @@ Also, you can use catalog specific shortcuts:
     alt-s : Selectors catalog.
     alt-p : System categories catalog.
     alt-t : Tools catalog.'!
-!provides: 'PopupFinder' 1 58!
+!provides: 'PopupFinder' 1 60!
 !requires: 'WorldKeyStrokes' 1 4 nil!
 SystemOrganization addCategory: 'PopupFinder-Model'!
 SystemOrganization addCategory: 'PopupFinder-UI'!
@@ -998,16 +998,15 @@ processNonEmptySearchQuery: aQuery
 		valueFiltering: SystemOrganization categories
 		with: aQuery! !
 
-!PackagesCatalog methodsFor: 'browsing' stamp: 'NPM 4/2/2020 02:25:34'!
+!PackagesCatalog methodsFor: 'browsing' stamp: 'MM 6/16/2023 18:33:19'!
 browse: aSystemCategoryName 
 	
 	
 	| newBrowser |
-	newBrowser _ Browser new.
-			newBrowser systemCategoryListIndex: (newBrowser systemCategoryList indexOf: aSystemCategoryName).
+	newBrowser := Browser new.
+	newBrowser setSelectedSystemCategory: aSystemCategoryName.
 
-			BrowserWindow
-				open: newBrowser label: newBrowser defaultBrowserTitle! !
+	BrowserWindow			open: newBrowser label: newBrowser defaultBrowserTitle! !
 
 !PackagesCatalog methodsFor: 'as yet unclassified' stamp: 'MM 2/6/2021 15:11:50'!
 keyStrokeCharacter
@@ -1096,10 +1095,10 @@ labelFor: aMenuItem
 
 	^ aMenuItem first at: #label! !
 
-!ToolsCatalog methodsFor: 'tools' stamp: 'NPM 4/4/2020 01:49:39'!
+!ToolsCatalog methodsFor: 'tools' stamp: 'MM 6/16/2023 18:41:10'!
 menuItemsForOpenGroup
 
-	^ (ImplementorsCatalog new search: #worldMenuForOpenGroup)
+	^ (ImplementorsCatalog new search: #worldMenuOptions)
 		collect: [ :implementor |
 				implementor compiledMethod
 					valueWithReceiver: implementor
